@@ -4,9 +4,6 @@
  * If this is an open source Java library, include the proper license and copyright attributions here!
  */
 
-using Lucene.Net.Search.Highlight;
-using Sharpen;
-
 namespace Lucene.Net.Search.Highlight
 {
 	/// <summary>

@@ -5,12 +5,11 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Text;
 using Lucene.Net.Analysis;
 using Lucene.Net.Analysis.Tokenattributes;
-using Lucene.Net.Search.Highlight;
 using Lucene.Net.Util;
-using Sharpen;
 
 namespace Lucene.Net.Search.Highlight
 {
@@ -32,13 +31,13 @@ namespace Lucene.Net.Search.Highlight
 
 		private int maxDocCharsToAnalyze = DEFAULT_MAX_CHARS_TO_ANALYZE;
 
-		private Formatter formatter;
+		private Formatter _formatter;
 
-		private Encoder encoder;
+		private Encoder _encoder;
 
-		private Fragmenter textFragmenter = new SimpleFragmenter();
+		private Fragmenter _textFragmenter = new SimpleFragmenter();
 
-		private Scorer fragmentScorer = null;
+		private Scorer _fragmentScorer = null;
 
 		public Highlighter(Scorer fragmentScorer) : this(new SimpleHTMLFormatter(), fragmentScorer
 			)
@@ -52,9 +51,9 @@ namespace Lucene.Net.Search.Highlight
 
 		public Highlighter(Formatter formatter, Encoder encoder, Scorer fragmentScorer)
 		{
-			this.formatter = formatter;
-			this.encoder = encoder;
-			this.fragmentScorer = fragmentScorer;
+			this._formatter = formatter;
+			this._encoder = encoder;
+			this._fragmentScorer = fragmentScorer;
 		}
 
 		/// <summary>Highlights chosen terms in a text, extracting the most relevant section.
@@ -139,49 +138,49 @@ namespace Lucene.Net.Search.Highlight
 		/// <exception cref="System.IO.IOException"></exception>
 		/// <exception cref="Lucene.Net.Search.Highlight.InvalidTokenOffsetsException"
 		/// 	></exception>
-		public string[] GetBestFragments(Analyzer analyzer, string fieldName, string text
-			, int maxNumFragments)
+		public string[] GetBestFragments(Analyzer analyzer, string fieldName, string text, int maxNumFragments)
 		{
 			TokenStream tokenStream = analyzer.TokenStream(fieldName, text);
 			return GetBestFragments(tokenStream, text, maxNumFragments);
 		}
 
-		/// <summary>Highlights chosen terms in a text, extracting the most relevant sections.
-		/// 	</summary>
-		/// <remarks>
-		/// Highlights chosen terms in a text, extracting the most relevant sections.
-		/// The document text is analysed in chunks to record hit statistics
-		/// across the document. After accumulating stats, the fragments with the highest scores
-		/// are returned as an array of strings in order of score (contiguous fragments are merged into
-		/// one in their original order to improve readability)
-		/// </remarks>
-		/// <param name="text">text to highlight terms in</param>
-		/// <param name="maxNumFragments">the maximum number of fragments.</param>
-		/// <returns>highlighted text fragments (between 0 and maxNumFragments number of fragments)
-		/// 	</returns>
-		/// <exception cref="InvalidTokenOffsetsException">thrown if any token's endOffset exceeds the provided text's length
-		/// 	</exception>
-		/// <exception cref="System.IO.IOException"></exception>
-		/// <exception cref="Lucene.Net.Search.Highlight.InvalidTokenOffsetsException"
-		/// 	></exception>
-		public string[] GetBestFragments(TokenStream tokenStream, string text, int maxNumFragments
-			)
-		{
-			maxNumFragments = Math.Max(1, maxNumFragments);
-			//sanity check
-			TextFragment[] frag = GetBestTextFragments(tokenStream, text, true, maxNumFragments
-				);
-			//Get text
-			AList<string> fragTexts = new AList<string>();
-			for (int i = 0; i < frag.Length; i++)
-			{
-				if ((frag[i] != null) && (frag[i].GetScore() > 0))
-				{
-					fragTexts.AddItem(frag[i].ToString());
-				}
-			}
-			return Sharpen.Collections.ToArray(fragTexts, new string[0]);
-		}
+        /// <summary>Highlights chosen terms in a text, extracting the most relevant sections.
+        /// 	</summary>
+        /// <remarks>
+        /// Highlights chosen terms in a text, extracting the most relevant sections.
+        /// The document text is analysed in chunks to record hit statistics
+        /// across the document. After accumulating stats, the fragments with the highest scores
+        /// are returned as an array of strings in order of score (contiguous fragments are merged into
+        /// one in their original order to improve readability)
+        /// </remarks>
+        /// <param name="text">text to highlight terms in</param>
+        /// <param name="maxNumFragments">the maximum number of fragments.</param>
+        /// <returns>highlighted text fragments (between 0 and maxNumFragments number of fragments)
+        /// 	</returns>
+        /// <exception cref="InvalidTokenOffsetsException">thrown if any token's endOffset exceeds the provided text's length
+        /// 	</exception>
+        /// <exception cref="System.IO.IOException"></exception>
+        /// <exception cref="Lucene.Net.Search.Highlight.InvalidTokenOffsetsException"
+        /// 	></exception>
+        public string[] GetBestFragments(TokenStream tokenStream, string text, int maxNumFragments
+            )
+        {
+            maxNumFragments = Math.Max(1, maxNumFragments);
+            //sanity check
+            TextFragment[] frag = GetBestTextFragments(tokenStream, text, true, maxNumFragments
+                );
+            //Get text
+            var fragTexts = new List<string>();
+            for (int i = 0; i < frag.Length; i++)
+            {
+                if ((frag[i] != null) && (frag[i].GetScore() > 0))
+                {
+                    fragTexts.Add(frag[i].ToString());
+                }
+            }
+            return fragTexts.ToArray();
+            // CHECK_CHECK: return Sharpen.Collections.ToArray(fragTexts, new string[0]);
+        }
 
 		/// <summary>Low level api to get the most relevant (formatted) sections of the document.
 		/// 	</summary>
@@ -198,24 +197,23 @@ namespace Lucene.Net.Search.Highlight
 		public TextFragment[] GetBestTextFragments(TokenStream tokenStream, string text, 
 			bool mergeContiguousFragments, int maxNumFragments)
 		{
-			AList<TextFragment> docFrags = new AList<TextFragment>();
+			var docFrags = new List<TextFragment>();
 			StringBuilder newText = new StringBuilder();
 			CharTermAttribute termAtt = tokenStream.AddAttribute<CharTermAttribute>();
 			OffsetAttribute offsetAtt = tokenStream.AddAttribute<OffsetAttribute>();
 			tokenStream.Reset();
-			TextFragment currentFrag = new TextFragment(newText, newText.Length, docFrags.Count
-				);
-			if (fragmentScorer is QueryScorer)
+			TextFragment currentFrag = new TextFragment(newText, newText.Length, docFrags.Count);
+			if (_fragmentScorer is QueryScorer)
 			{
-				((QueryScorer)fragmentScorer).SetMaxDocCharsToAnalyze(maxDocCharsToAnalyze);
+				((QueryScorer)_fragmentScorer).SetMaxDocCharsToAnalyze(maxDocCharsToAnalyze);
 			}
-			TokenStream newStream = fragmentScorer.Init(tokenStream);
+			TokenStream newStream = _fragmentScorer.Init(tokenStream);
 			if (newStream != null)
 			{
 				tokenStream = newStream;
 			}
-			fragmentScorer.StartFragment(currentFrag);
-			docFrags.AddItem(currentFrag);
+			_fragmentScorer.StartFragment(currentFrag);
+			docFrags.Add(currentFrag);
 			FragmentQueue fragQueue = new FragmentQueue(maxNumFragments);
 			try
 			{
@@ -223,7 +221,7 @@ namespace Lucene.Net.Search.Highlight
 				int startOffset;
 				int endOffset;
 				int lastEndOffset = 0;
-				textFragmenter.Start(text, tokenStream);
+				_textFragmenter.Start(text, tokenStream);
 				TokenGroup tokenGroup = new TokenGroup(tokenStream);
 				for (bool next = tokenStream.IncrementToken(); next && (offsetAtt.StartOffset() <
 					 maxDocCharsToAnalyze); next = tokenStream.IncrementToken())
@@ -240,49 +238,47 @@ namespace Lucene.Net.Search.Highlight
 						// markup the cached token group info
 						startOffset = tokenGroup.matchStartOffset;
 						endOffset = tokenGroup.matchEndOffset;
-						tokenText = Sharpen.Runtime.Substring(text, startOffset, endOffset);
-						string markedUpText = formatter.HighlightTerm(encoder.EncodeText(tokenText), tokenGroup
+						tokenText = text.Substring(startOffset, endOffset);
+						string markedUpText = _formatter.HighlightTerm(_encoder.EncodeText(tokenText), tokenGroup
 							);
 						//store any whitespace etc from between this and last group
 						if (startOffset > lastEndOffset)
 						{
-							newText.Append(encoder.EncodeText(Sharpen.Runtime.Substring(text, lastEndOffset, 
-								startOffset)));
+							newText.Append(_encoder.EncodeText(text.Substring(lastEndOffset, startOffset)));
 						}
 						newText.Append(markedUpText);
 						lastEndOffset = Math.Max(endOffset, lastEndOffset);
 						tokenGroup.Clear();
 						//check if current token marks the start of a new fragment
-						if (textFragmenter.IsNewFragment())
+						if (_textFragmenter.IsNewFragment())
 						{
-							currentFrag.SetScore(fragmentScorer.GetFragmentScore());
+							currentFrag.SetScore(_fragmentScorer.GetFragmentScore());
 							//record stats for a new fragment
 							currentFrag.textEndPos = newText.Length;
 							currentFrag = new TextFragment(newText, newText.Length, docFrags.Count);
-							fragmentScorer.StartFragment(currentFrag);
-							docFrags.AddItem(currentFrag);
+							_fragmentScorer.StartFragment(currentFrag);
+							docFrags.Add(currentFrag);
 						}
 					}
-					tokenGroup.AddToken(fragmentScorer.GetTokenScore());
+					tokenGroup.AddToken(_fragmentScorer.GetTokenScore());
 				}
 				//        if(lastEndOffset>maxDocBytesToAnalyze)
 				//        {
 				//          break;
 				//        }
-				currentFrag.SetScore(fragmentScorer.GetFragmentScore());
+				currentFrag.SetScore(_fragmentScorer.GetFragmentScore());
 				if (tokenGroup.numTokens > 0)
 				{
 					//flush the accumulated text (same code as in above loop)
 					startOffset = tokenGroup.matchStartOffset;
 					endOffset = tokenGroup.matchEndOffset;
-					tokenText = Sharpen.Runtime.Substring(text, startOffset, endOffset);
-					string markedUpText = formatter.HighlightTerm(encoder.EncodeText(tokenText), tokenGroup
+					tokenText = text.Substring(startOffset, endOffset);
+					string markedUpText = _formatter.HighlightTerm(_encoder.EncodeText(tokenText), tokenGroup
 						);
 					//store any whitespace etc from between this and last group
 					if (startOffset > lastEndOffset)
 					{
-						newText.Append(encoder.EncodeText(Sharpen.Runtime.Substring(text, lastEndOffset, 
-							startOffset)));
+						newText.Append(_encoder.EncodeText(text.Substring(lastEndOffset, startOffset)));
 					}
 					newText.Append(markedUpText);
 					lastEndOffset = Math.Max(lastEndOffset, endOffset);
@@ -293,7 +289,7 @@ namespace Lucene.Net.Search.Highlight
 					//          if there is text beyond the last token considered..
 					//          and that text is not too large...
 					//append it to the last fragment
-					newText.Append(encoder.EncodeText(Sharpen.Runtime.Substring(text, lastEndOffset))
+					newText.Append(_encoder.EncodeText(text.Substring(lastEndOffset))
 						);
 				}
 				currentFrag.textEndPos = newText.Length;
@@ -318,15 +314,16 @@ namespace Lucene.Net.Search.Highlight
 				if (mergeContiguousFragments)
 				{
 					MergeContiguousFragments(frag);
-					AList<TextFragment> fragTexts = new AList<TextFragment>();
+					List<TextFragment> fragTexts = new List<TextFragment>();
 					for (int i_2 = 0; i_2 < frag.Length; i_2++)
 					{
 						if ((frag[i_2] != null) && (frag[i_2].GetScore() > 0))
 						{
-							fragTexts.AddItem(frag[i_2]);
+							fragTexts.Add(frag[i_2]);
 						}
 					}
-					frag = Sharpen.Collections.ToArray(fragTexts, new TextFragment[0]);
+                    // CHECK_CHECK: frag = Sharpen.Collections.ToArray(fragTexts, new TextFragment[0]);
+				    frag = fragTexts.ToArray();
 				}
 				return frag;
 			}
@@ -337,7 +334,7 @@ namespace Lucene.Net.Search.Highlight
 					try
 					{
 						tokenStream.End();
-						tokenStream.Close();
+						tokenStream.Dispose();
 					}
 					catch (Exception)
 					{
@@ -481,33 +478,33 @@ namespace Lucene.Net.Search.Highlight
 
 		public virtual Fragmenter GetTextFragmenter()
 		{
-			return textFragmenter;
+			return _textFragmenter;
 		}
 
 		public virtual void SetTextFragmenter(Fragmenter fragmenter)
 		{
-			textFragmenter = fragmenter;
+			_textFragmenter = fragmenter;
 		}
 
 		/// <returns>Object used to score each text fragment</returns>
 		public virtual Scorer GetFragmentScorer()
 		{
-			return fragmentScorer;
+			return _fragmentScorer;
 		}
 
 		public virtual void SetFragmentScorer(Scorer scorer)
 		{
-			fragmentScorer = scorer;
+			_fragmentScorer = scorer;
 		}
 
 		public virtual Encoder GetEncoder()
 		{
-			return encoder;
+			return _encoder;
 		}
 
 		public virtual void SetEncoder(Encoder encoder)
 		{
-			this.encoder = encoder;
+			this._encoder = encoder;
 		}
 	}
 
@@ -517,16 +514,17 @@ namespace Lucene.Net.Search.Highlight
 		{
 		}
 
-		protected sealed override bool LessThan(TextFragment fragA, TextFragment fragB)
-		{
-			if (fragA.GetScore() == fragB.GetScore())
-			{
-				return fragA.fragNum > fragB.fragNum;
-			}
-			else
-			{
-				return fragA.GetScore() < fragB.GetScore();
-			}
-		}
-	}
+//		protected sealed override bool LessThan(TextFragment fragA, TextFragment fragB)
+	    public override bool LessThan(TextFragment fragA, TextFragment fragB)
+	    {
+//            if (fragA.GetScore() == fragB.GetScore())
+            if (fragA.GetScore().Equals(fragB.GetScore()))
+            {
+                return fragA.fragNum > fragB.fragNum;
+            }
+
+            return fragA.GetScore() < fragB.GetScore();
+        }
+
+    }
 }

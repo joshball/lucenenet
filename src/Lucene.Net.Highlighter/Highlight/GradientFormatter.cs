@@ -6,8 +6,6 @@
 
 using System;
 using System.Text;
-using Lucene.Net.Search.Highlight;
-using Sharpen;
 
 namespace Lucene.Net.Search.Highlight
 {
@@ -89,12 +87,12 @@ namespace Lucene.Net.Search.Highlight
 					throw new ArgumentException("minForegroundColor is not 7 bytes long eg a hex " + 
 						"RGB value such as #FFFFFF");
 				}
-				fgRMin = HexToInt(Sharpen.Runtime.Substring(minForegroundColor, 1, 3));
-				fgGMin = HexToInt(Sharpen.Runtime.Substring(minForegroundColor, 3, 5));
-				fgBMin = HexToInt(Sharpen.Runtime.Substring(minForegroundColor, 5, 7));
-				fgRMax = HexToInt(Sharpen.Runtime.Substring(maxForegroundColor, 1, 3));
-				fgGMax = HexToInt(Sharpen.Runtime.Substring(maxForegroundColor, 3, 5));
-				fgBMax = HexToInt(Sharpen.Runtime.Substring(maxForegroundColor, 5, 7));
+				fgRMin = HexToInt(minForegroundColor.Substring(1, 3));
+				fgGMin = HexToInt(minForegroundColor.Substring(3, 5));
+				fgBMin = HexToInt(minForegroundColor.Substring(5, 7));
+				fgRMax = HexToInt(maxForegroundColor.Substring(1, 3));
+				fgGMax = HexToInt(maxForegroundColor.Substring(3, 5));
+				fgBMax = HexToInt(maxForegroundColor.Substring(5, 7));
 			}
 			highlightBackground = (minBackgroundColor != null) && (maxBackgroundColor != null
 				);
@@ -110,12 +108,12 @@ namespace Lucene.Net.Search.Highlight
 					throw new ArgumentException("minBackgroundColor is not 7 bytes long eg a hex " + 
 						"RGB value such as #FFFFFF");
 				}
-				bgRMin = HexToInt(Sharpen.Runtime.Substring(minBackgroundColor, 1, 3));
-				bgGMin = HexToInt(Sharpen.Runtime.Substring(minBackgroundColor, 3, 5));
-				bgBMin = HexToInt(Sharpen.Runtime.Substring(minBackgroundColor, 5, 7));
-				bgRMax = HexToInt(Sharpen.Runtime.Substring(maxBackgroundColor, 1, 3));
-				bgGMax = HexToInt(Sharpen.Runtime.Substring(maxBackgroundColor, 3, 5));
-				bgBMax = HexToInt(Sharpen.Runtime.Substring(maxBackgroundColor, 5, 7));
+				bgRMin = HexToInt(minBackgroundColor.Substring(1, 3));
+				bgGMin = HexToInt(minBackgroundColor.Substring(3, 5));
+				bgBMin = HexToInt(minBackgroundColor.Substring(5, 7));
+				bgRMax = HexToInt(minBackgroundColor.Substring(1, 3));
+				bgGMax = HexToInt(minBackgroundColor.Substring(3, 5));
+				bgBMax = HexToInt(minBackgroundColor.Substring(5, 7));
 			}
 			//        this.corpusReader = corpusReader;
 			this.maxScore = maxScore;
@@ -191,7 +189,7 @@ namespace Lucene.Net.Search.Highlight
 			return Math.Min(colorMin, colorMax) + (int)colScore;
 		}
 
-		private static char hexDigits = new char[] { '0', '1', '2', '3', '4', '5', '6', '7'
+		private static char[] hexDigits = new char[] { '0', '1', '2', '3', '4', '5', '6', '7'
 			, '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
 
 		private static string IntToHex(int i)
@@ -225,18 +223,20 @@ namespace Lucene.Net.Search.Highlight
 			{
 				throw new FormatException();
 			}
-			int l = 0;
-			for (int i = 0; i < len; i++)
-			{
-				l <<= 4;
-				int c = char.Digit(hex[i], 16);
-				if (c < 0)
-				{
-					throw new FormatException();
-				}
-				l |= c;
-			}
-			return l;
-		}
-	}
+		    return Convert.ToInt32(hex);
+            // CHECK_CHECK:
+            //          int l = 0;
+            //			for (int i = 0; i < len; i++)
+            //			{
+            //				l <<= 4;
+            //				int c = char.Digit(hex[i], 16);
+            //				if (c < 0)
+            //				{
+            //					throw new FormatException();
+            //				}
+            //				l |= c;
+            //			}
+            //			return l;
+        }
+    }
 }

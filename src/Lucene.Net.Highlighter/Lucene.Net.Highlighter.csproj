@@ -93,6 +93,12 @@
     <Compile Include="Vectorhighlight\WeightedFieldFragList.cs" />
     <Compile Include="Vectorhighlight\WeightedFragListBuilder.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lucene.Net.Core\Lucene.Net.csproj">
+      <Project>{5D4AD9BE-1FFB-41AB-9943-25737971BF57}</Project>
+      <Name>Lucene.Net</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
