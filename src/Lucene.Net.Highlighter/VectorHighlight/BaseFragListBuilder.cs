@@ -47,7 +47,7 @@ namespace Lucene.Net.Search.VectorHighlight
 				throw new ArgumentException("fragCharSize(" + fragCharSize + ") is too small. It must be "
 					 + minFragCharSize + " or higher.");
 			}
-			IList<FieldPhraseList.WeightedPhraseInfo> wpil = new AList<FieldPhraseList.WeightedPhraseInfo
+			IList<FieldPhraseList.WeightedPhraseInfo> wpil = new List<FieldPhraseList.WeightedPhraseInfo
 				>();
 			BaseFragListBuilder.IteratorQueue<FieldPhraseList.WeightedPhraseInfo> queue = new 
 				BaseFragListBuilder.IteratorQueue<FieldPhraseList.WeightedPhraseInfo>(fieldPhraseList

@@ -28,7 +28,7 @@ namespace Lucene.Net.Search.PostingsHighlight
 		internal static CharacterRunAutomaton[] ExtractAutomata(Query query, string field
 			)
 		{
-			IList<CharacterRunAutomaton> list = new AList<CharacterRunAutomaton>();
+			IList<CharacterRunAutomaton> list = new List<CharacterRunAutomaton>();
 			if (query is BooleanQuery)
 			{
 				BooleanClause[] clauses = ((BooleanQuery)query).GetClauses();

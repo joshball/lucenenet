@@ -20,11 +20,11 @@ namespace Lucene.Net.Search.Highlight
 	{
 		internal bool positionSensitive;
 
-		private IList<PositionSpan> positionSpans = new AList<PositionSpan>();
+		private IList<PositionSpan> positionSpans = new List<PositionSpan>();
 
 		public WeightedSpanTerm(float weight, string term) : base(weight, term)
 		{
-			this.positionSpans = new AList<PositionSpan>();
+			this.positionSpans = new List<PositionSpan>();
 		}
 
 		public WeightedSpanTerm(float weight, string term, bool positionSensitive) : base

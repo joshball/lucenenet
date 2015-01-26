@@ -147,7 +147,7 @@ namespace Lucene.Net.Search.VectorHighlight
 			{
 				return;
 			}
-			IList<FieldPhraseList.WeightedPhraseInfo> work = new AList<FieldPhraseList.WeightedPhraseInfo
+			IList<FieldPhraseList.WeightedPhraseInfo> work = new List<FieldPhraseList.WeightedPhraseInfo
 				>();
 			FieldPhraseList.WeightedPhraseInfo first = itr.Next();
 			work.AddItem(first);
@@ -211,7 +211,7 @@ namespace Lucene.Net.Search.VectorHighlight
 
 			private int seqnum;
 
-			private AList<FieldTermStack.TermInfo> termsInfos;
+			private List<FieldTermStack.TermInfo> termsInfos;
 
 			// usually termsOffsets.size() == 1,
 			// but if position-gap > 1 and slop > 0 then size() could be greater than 1
@@ -258,8 +258,8 @@ namespace Lucene.Net.Search.VectorHighlight
 				this.boost = boost;
 				this.seqnum = seqnum;
 				// We keep TermInfos for further operations
-				termsInfos = new AList<FieldTermStack.TermInfo>(terms);
-				termsOffsets = new AList<FieldPhraseList.WeightedPhraseInfo.Toffs>(terms.Count);
+				termsInfos = new List<FieldTermStack.TermInfo>(terms);
+				termsOffsets = new List<FieldPhraseList.WeightedPhraseInfo.Toffs>(terms.Count);
 				FieldTermStack.TermInfo ti = terms[0];
 				termsOffsets.AddItem(new FieldPhraseList.WeightedPhraseInfo.Toffs(ti.GetStartOffset
 					(), ti.GetEndOffset()));
@@ -304,7 +304,7 @@ namespace Lucene.Net.Search.VectorHighlight
 				FieldPhraseList.WeightedPhraseInfo first = toMergeItr.Next();
 				Iterator<FieldPhraseList.WeightedPhraseInfo.Toffs>[] allToffs = new Iterator[toMerge
 					.Count];
-				termsInfos = new AList<FieldTermStack.TermInfo>();
+				termsInfos = new List<FieldTermStack.TermInfo>();
 				seqnum = first.seqnum;
 				boost = first.boost;
 				allToffs[0] = first.termsOffsets.Iterator();
@@ -319,7 +319,7 @@ namespace Lucene.Net.Search.VectorHighlight
 				// Step 2.  Walk the sorted list merging overlaps
 				MergedIterator<FieldPhraseList.WeightedPhraseInfo.Toffs> itr = new MergedIterator
 					<FieldPhraseList.WeightedPhraseInfo.Toffs>(false, allToffs);
-				termsOffsets = new AList<FieldPhraseList.WeightedPhraseInfo.Toffs>();
+				termsOffsets = new List<FieldPhraseList.WeightedPhraseInfo.Toffs>();
 				if (!itr.HasNext())
 				{
 					return;

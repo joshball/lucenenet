@@ -29,7 +29,7 @@ namespace Lucene.Net.Search.VectorHighlight
 			int fragCharSize)
 		{
 			FieldFragList ffl = new SimpleFieldFragList(fragCharSize);
-			IList<FieldPhraseList.WeightedPhraseInfo> wpil = new AList<FieldPhraseList.WeightedPhraseInfo
+			IList<FieldPhraseList.WeightedPhraseInfo> wpil = new List<FieldPhraseList.WeightedPhraseInfo
 				>();
 			Iterator<FieldPhraseList.WeightedPhraseInfo> ite = fieldPhraseList.phraseList.Iterator
 				();

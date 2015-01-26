@@ -5,6 +5,7 @@
  */
 
 using System.Collections.Generic;
+using System.Diagnostics;
 using Lucene.Net.Analysis;
 using Lucene.Net.Analysis.Tokenattributes;
 using Lucene.Net.Index;
@@ -16,7 +17,7 @@ namespace Lucene.Net.Search.Highlight
 	/// <remarks>TokenStream created from a term vector field.</remarks>
 	public sealed class TokenStreamFromTermPositionVector : TokenStream
 	{
-		private readonly IList<Token> positionedTokens = new AList<Token>();
+		private readonly IList<Token> positionedTokens = new List<Token>();
 
 		private Iterator<Token> tokensAtCurrentPosition;
 
@@ -48,10 +49,10 @@ namespace Lucene.Net.Search.Highlight
 			DocsAndPositionsEnum dpEnum = null;
 			while ((text = termsEnum.Next()) != null)
 			{
-				dpEnum = termsEnum.DocsAndPositions(null, dpEnum);
-				// presumably checked by TokenSources.hasPositions earlier
-				dpEnum != null.NextDoc();
-				int freq = dpEnum.Freq();
+			    dpEnum = termsEnum.DocsAndPositions(null, dpEnum);
+                Debug.Assert(dpEnum != null); // presumably checked by TokenSources.hasPositions earlier
+                dpEnum.NextDoc();
+                int freq = dpEnum.Freq();
 				for (int j = 0; j < freq; j++)
 				{
 					int pos = dpEnum.NextPosition();
@@ -70,21 +71,21 @@ namespace Lucene.Net.Search.Highlight
 						// Must make a deep copy of the returned payload,
 						// since D&PEnum API is allowed to re-use on every
 						// call:
-						token.SetPayload(BytesRef.DeepCopyOf(dpEnum.GetPayload()));
+						token.Payload = BytesRef.DeepCopyOf(dpEnum.Payload);
 					}
 					// Yes - this is the position, not the increment! This is for
 					// sorting. This value
 					// will be corrected before use.
-					token.SetPositionIncrement(pos);
-					this.positionedTokens.AddItem(token);
+					token.PositionIncrement = pos;
+					this.positionedTokens.Add(token);
 				}
 			}
 			CollectionUtil.TimSort(this.positionedTokens, tokenComparator);
 			int lastPosition = -1;
 			foreach (Token token_1 in this.positionedTokens)
 			{
-				int thisPosition = token_1.GetPositionIncrement();
-				token_1.SetPositionIncrement(thisPosition - lastPosition);
+				int thisPosition = token_1.PositionIncrement;
+				token_1.PositionIncrement = thisPosition - lastPosition;
 				lastPosition = thisPosition;
 			}
 			this.tokensAtCurrentPosition = this.positionedTokens.Iterator();
@@ -98,7 +99,7 @@ namespace Lucene.Net.Search.Highlight
 
 			public int Compare(Token o1, Token o2)
 			{
-				return o1.GetPositionIncrement() - o2.GetPositionIncrement();
+				return o1.PositionIncrement - o2.PositionIncrement;
 			}
 		}
 
@@ -111,9 +112,9 @@ namespace Lucene.Net.Search.Highlight
 				Token next = this.tokensAtCurrentPosition.Next();
 				ClearAttributes();
 				termAttribute.SetEmpty().Append(next);
-				positionIncrementAttribute.SetPositionIncrement(next.GetPositionIncrement());
+				positionIncrementAttribute.PositionIncrement = next.PositionIncrement;
 				offsetAttribute.SetOffset(next.StartOffset(), next.EndOffset());
-				payloadAttribute.SetPayload(next.GetPayload());
+				payloadAttribute.Payload = next.Payload;
 				return true;
 			}
 			return false;

@@ -19,7 +19,7 @@ namespace Lucene.Net.Search.VectorHighlight
 	/// </remarks>
 	public abstract class FieldFragList
 	{
-		private IList<FieldFragList.WeightedFragInfo> fragInfos = new AList<FieldFragList.WeightedFragInfo
+		private IList<FieldFragList.WeightedFragInfo> fragInfos = new List<FieldFragList.WeightedFragInfo
 			>();
 
 		/// <summary>a constructor.</summary>

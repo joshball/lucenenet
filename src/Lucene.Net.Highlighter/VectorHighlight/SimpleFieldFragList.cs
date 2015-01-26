@@ -26,7 +26,7 @@ namespace Lucene.Net.Search.VectorHighlight
 			> phraseInfoList)
 		{
 			float totalBoost = 0;
-			IList<FieldFragList.WeightedFragInfo.SubInfo> subInfos = new AList<FieldFragList.WeightedFragInfo.SubInfo
+			IList<FieldFragList.WeightedFragInfo.SubInfo> subInfos = new List<FieldFragList.WeightedFragInfo.SubInfo
 				>();
 			foreach (FieldPhraseList.WeightedPhraseInfo phraseInfo in phraseInfoList)
 			{

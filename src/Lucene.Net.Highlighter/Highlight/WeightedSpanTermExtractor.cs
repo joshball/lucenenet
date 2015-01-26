@@ -77,7 +77,7 @@ namespace Lucene.Net.Search.Highlight
 				{
 					if (!queryClauses[i].IsProhibited())
 					{
-						Extract(queryClauses[i].GetQuery(), terms);
+						Extract(queryClauses[i].Query, terms);
 					}
 				}
 			}
@@ -121,7 +121,7 @@ namespace Lucene.Net.Search.Highlight
 						inorder = true;
 					}
 					SpanNearQuery sp = new SpanNearQuery(clauses, slop, inorder);
-					sp.SetBoost(query.GetBoost());
+					sp.SetBoost(query.Boost);
 					ExtractWeightedSpanTerms(terms, sp);
 				}
 				else
@@ -140,13 +140,13 @@ namespace Lucene.Net.Search.Highlight
 						{
 							if (query is FilteredQuery)
 							{
-								Extract(((FilteredQuery)query).GetQuery(), terms);
+								Extract(((FilteredQuery)query).Query, terms);
 							}
 							else
 							{
 								if (query is ConstantScoreQuery)
 								{
-									Query q = ((ConstantScoreQuery)query).GetQuery();
+									Query q = ((ConstantScoreQuery)query).Query;
 									if (q != null)
 									{
 										Extract(q, terms);
@@ -195,13 +195,13 @@ namespace Lucene.Net.Search.Highlight
 														IList<SpanQuery> disjuncts = disjunctLists[positions[i_1]];
 														if (disjuncts == null)
 														{
-															disjuncts = (disjunctLists[positions[i_1]] = new AList<SpanQuery>(termArray.Length
+															disjuncts = (disjunctLists[positions[i_1]] = new List<SpanQuery>(termArray.Length
 																));
 															++distinctPositions;
 														}
 														for (int j = 0; j < termArray.Length; ++j)
 														{
-															disjuncts.AddItem(new SpanTermQuery(termArray[j]));
+															disjuncts.Add(new SpanTermQuery(termArray[j]));
 														}
 													}
 													int positionGaps = 0;
@@ -220,10 +220,10 @@ namespace Lucene.Net.Search.Highlight
 															++positionGaps;
 														}
 													}
-													int slop = mpq.GetSlop();
+													int slop = mpq.Slop;
 													bool inorder = (slop == 0);
 													SpanNearQuery sp = new SpanNearQuery(clauses, slop + positionGaps, inorder);
-													sp.SetBoost(query.GetBoost());
+													sp.Boost = query.Boost;
 													ExtractWeightedSpanTerms(terms, sp);
 												}
 											}
@@ -286,12 +286,12 @@ namespace Lucene.Net.Search.Highlight
 			else
 			{
 				fieldNames = new HashSet<string>(1);
-				fieldNames.AddItem(fieldName);
+				fieldNames.Add(fieldName);
 			}
 			// To support the use of the default field name
 			if (defaultField != null)
 			{
-				fieldNames.AddItem(defaultField);
+				fieldNames.Add(defaultField);
 			}
 			IDictionary<string, SpanQuery> queries = new Dictionary<string, SpanQuery>();
 			ICollection<Term> nonWeightedTerms = new HashSet<Term>();
@@ -310,7 +310,7 @@ namespace Lucene.Net.Search.Highlight
 			{
 				spanQuery.ExtractTerms(nonWeightedTerms);
 			}
-			IList<PositionSpan> spanPositions = new AList<PositionSpan>();
+			IList<PositionSpan> spanPositions = new List<PositionSpan>();
 			foreach (string field_1 in fieldNames)
 			{
 				SpanQuery q;
@@ -336,7 +336,7 @@ namespace Lucene.Net.Search.Highlight
 				// collect span positions
 				while (spans.Next())
 				{
-					spanPositions.AddItem(new PositionSpan(spans.Start(), spans.End() - 1));
+					spanPositions.Add(new PositionSpan(spans.Start(), spans.End() - 1));
 				}
 			}
 			if (spanPositions.Count == 0)
@@ -351,7 +351,7 @@ namespace Lucene.Net.Search.Highlight
 					WeightedSpanTerm weightedSpanTerm = terms.Get(queryTerm.Text());
 					if (weightedSpanTerm == null)
 					{
-						weightedSpanTerm = new WeightedSpanTerm(spanQuery.GetBoost(), queryTerm.Text());
+						weightedSpanTerm = new WeightedSpanTerm(spanQuery.Boost, queryTerm.Text());
 						weightedSpanTerm.AddPositionSpans(spanPositions);
 						weightedSpanTerm.positionSensitive = true;
 						terms.Put(queryTerm.Text(), weightedSpanTerm);
@@ -383,7 +383,7 @@ namespace Lucene.Net.Search.Highlight
 			{
 				if (FieldNameComparator(queryTerm.Field()))
 				{
-					WeightedSpanTerm weightedSpanTerm = new WeightedSpanTerm(query.GetBoost(), queryTerm
+					WeightedSpanTerm weightedSpanTerm = new WeightedSpanTerm(query.Boost, queryTerm
 						.Text());
 					terms.Put(queryTerm.Text(), weightedSpanTerm);
 				}
@@ -402,24 +402,25 @@ namespace Lucene.Net.Search.Highlight
 		/// <exception cref="System.IO.IOException"></exception>
 		protected internal virtual AtomicReaderContext GetLeafContext()
 		{
-			if (internalReader == null)
-			{
-				if (wrapToCaching && !(tokenStream is CachingTokenFilter))
-				{
-					!cachedTokenStream = new CachingTokenFilter(new OffsetLimitTokenFilter(tokenStream
-						, maxDocCharsToAnalyze));
-					cachedTokenStream = true;
-				}
-				MemoryIndex indexer = new MemoryIndex(true);
-				indexer.AddField(WeightedSpanTermExtractor.DelegatingAtomicReader.FIELD_NAME, tokenStream
-					);
-				tokenStream.Reset();
-				IndexSearcher searcher = indexer.CreateSearcher();
-				// MEM index has only atomic ctx
-				internalReader = new WeightedSpanTermExtractor.DelegatingAtomicReader(((AtomicReader
-					)((AtomicReaderContext)searcher.GetTopReaderContext()).Reader()));
-			}
-			return ((AtomicReaderContext)internalReader.GetContext());
+            // PORT: Need to import the Memory module
+            //			if (internalReader == null)
+            //			{
+            //				if (wrapToCaching && !(tokenStream is CachingTokenFilter))
+            //				{
+            //					!cachedTokenStream = new CachingTokenFilter(new OffsetLimitTokenFilter(tokenStream
+            //						, maxDocCharsToAnalyze));
+            //					cachedTokenStream = true;
+            //				}
+            //				MemoryIndex indexer = new MemoryIndex(true);
+            //				indexer.AddField(WeightedSpanTermExtractor.DelegatingAtomicReader.FIELD_NAME, tokenStream
+            //					);
+            //				tokenStream.Reset();
+            //				IndexSearcher searcher = indexer.CreateSearcher();
+            //				// MEM index has only atomic ctx
+            //				internalReader = new WeightedSpanTermExtractor.DelegatingAtomicReader(((AtomicReader
+            //					)((AtomicReaderContext)searcher.GetTopReaderContext()).Reader()));
+            //			}
+            return ((AtomicReaderContext)internalReader.Context);
 		}
 
 		internal sealed class DelegatingAtomicReader : FilterAtomicReader
@@ -638,7 +639,7 @@ namespace Lucene.Net.Search.Highlight
 							}
 							else
 							{
-								fieldNames.AddItem(spanQuery.GetField());
+								fieldNames.Add(spanQuery.GetField());
 							}
 						}
 					}

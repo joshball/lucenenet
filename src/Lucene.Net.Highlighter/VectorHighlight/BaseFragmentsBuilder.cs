@@ -147,7 +147,7 @@ namespace Lucene.Net.Search.VectorHighlight
 			fragInfos = GetWeightedFragInfoList(fragInfos);
 			int limitFragments = maxNumFragments < fragInfos.Count ? maxNumFragments : fragInfos
 				.Count;
-			IList<string> fragments = new AList<string>(limitFragments);
+			IList<string> fragments = new List<string>(limitFragments);
 			StringBuilder buffer = new StringBuilder();
 			int[] nextValueIndex = new int[] { 0 };
 			for (int n = 0; n < limitFragments; n++)
@@ -164,7 +164,7 @@ namespace Lucene.Net.Search.VectorHighlight
 			 fieldName)
 		{
 			// according to javadoc, doc.getFields(fieldName) cannot be used with lazy loaded field???
-			IList<Field> fields = new AList<Field>();
+			IList<Field> fields = new List<Field>();
 			reader.Document(docId, new _StoredFieldVisitor_152(fields, fieldName));
 			return Sharpen.Collections.ToArray(fields, new Field[fields.Count]);
 		}
@@ -262,7 +262,7 @@ namespace Lucene.Net.Search.VectorHighlight
 				new Dictionary<string, IList<FieldFragList.WeightedFragInfo>>();
 			foreach (Field field in fields)
 			{
-				fieldNameToFragInfos.Put(field.Name(), new AList<FieldFragList.WeightedFragInfo>(
+				fieldNameToFragInfos.Put(field.Name(), new List<FieldFragList.WeightedFragInfo>(
 					));
 			}
 			foreach (FieldFragList.WeightedFragInfo fragInfo in fragInfos)
@@ -305,7 +305,7 @@ namespace Lucene.Net.Search.VectorHighlight
 					{
 						fragEnd = fragInfo.GetEndOffset();
 					}
-					IList<FieldFragList.WeightedFragInfo.SubInfo> subInfos = new AList<FieldFragList.WeightedFragInfo.SubInfo
+					IList<FieldFragList.WeightedFragInfo.SubInfo> subInfos = new List<FieldFragList.WeightedFragInfo.SubInfo
 						>();
 					Iterator<FieldFragList.WeightedFragInfo.SubInfo> subInfoIterator = fragInfo.GetSubInfos
 						().Iterator();
@@ -314,7 +314,7 @@ namespace Lucene.Net.Search.VectorHighlight
 					while (subInfoIterator.HasNext())
 					{
 						FieldFragList.WeightedFragInfo.SubInfo subInfo = subInfoIterator.Next();
-						IList<FieldPhraseList.WeightedPhraseInfo.Toffs> toffsList = new AList<FieldPhraseList.WeightedPhraseInfo.Toffs
+						IList<FieldPhraseList.WeightedPhraseInfo.Toffs> toffsList = new List<FieldPhraseList.WeightedPhraseInfo.Toffs
 							>();
 						Iterator<FieldPhraseList.WeightedPhraseInfo.Toffs> toffsIterator = subInfo.GetTermsOffsets
 							().Iterator();
@@ -344,7 +344,7 @@ namespace Lucene.Net.Search.VectorHighlight
 				}
 			}
 fragInfos_break: ;
-			IList<FieldFragList.WeightedFragInfo> result = new AList<FieldFragList.WeightedFragInfo
+			IList<FieldFragList.WeightedFragInfo> result = new List<FieldFragList.WeightedFragInfo
 				>();
 			foreach (IList<FieldFragList.WeightedFragInfo> weightedFragInfos in fieldNameToFragInfos
 				.Values)

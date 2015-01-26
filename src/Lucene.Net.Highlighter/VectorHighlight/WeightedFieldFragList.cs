@@ -26,9 +26,9 @@ namespace Lucene.Net.Search.VectorHighlight
 		public override void Add(int startOffset, int endOffset, IList<FieldPhraseList.WeightedPhraseInfo
 			> phraseInfoList)
 		{
-			IList<FieldFragList.WeightedFragInfo.SubInfo> tempSubInfos = new AList<FieldFragList.WeightedFragInfo.SubInfo
+			IList<FieldFragList.WeightedFragInfo.SubInfo> tempSubInfos = new List<FieldFragList.WeightedFragInfo.SubInfo
 				>();
-			IList<FieldFragList.WeightedFragInfo.SubInfo> realSubInfos = new AList<FieldFragList.WeightedFragInfo.SubInfo
+			IList<FieldFragList.WeightedFragInfo.SubInfo> realSubInfos = new List<FieldFragList.WeightedFragInfo.SubInfo
 				>();
 			HashSet<string> distinctTerms = new HashSet<string>();
 			int length = 0;

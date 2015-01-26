@@ -907,7 +907,7 @@ namespace Lucene.Net.Search.PostingsHighlight
 			 bi, int maxPassages)
 		{
 			// BreakIterator should be un-next'd:
-			IList<Passage> passages = new AList<Passage>();
+			IList<Passage> passages = new List<Passage>();
 			int pos = bi.Current();
 			while (pos == 0.Count < maxPassages)
 			{
