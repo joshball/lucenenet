@@ -5,8 +5,6 @@
  */
 
 using System.Collections.Generic;
-using Lucene.Net.Search.Highlight;
-using Sharpen;
 
 namespace Lucene.Net.Search.Highlight
 {

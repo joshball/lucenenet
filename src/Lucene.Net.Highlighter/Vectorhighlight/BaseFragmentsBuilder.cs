@@ -10,10 +10,9 @@ using System.Text;
 using Lucene.Net.Document;
 using Lucene.Net.Index;
 using Lucene.Net.Search.Highlight;
-using Lucene.Net.Search.Vectorhighlight;
-using Sharpen;
+using Lucene.Net.Search.VectorHighlight;
 
-namespace Lucene.Net.Search.Vectorhighlight
+namespace Lucene.Net.Search.VectorHighlight
 {
 	/// <summary>
 	/// Base FragmentsBuilder implementation that supports colored pre/post

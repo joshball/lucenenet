@@ -11,11 +11,8 @@ using Lucene.Net.Analysis;
 using Lucene.Net.Index;
 using Lucene.Net.Index.Memory;
 using Lucene.Net.Queries;
-using Lucene.Net.Search;
-using Lucene.Net.Search.Highlight;
 using Lucene.Net.Search.Spans;
 using Lucene.Net.Util;
-using Sharpen;
 
 namespace Lucene.Net.Search.Highlight
 {

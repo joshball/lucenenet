@@ -6,10 +6,8 @@
 
 using System;
 using System.Text;
-using Lucene.Net.Search.Postingshighlight;
-using Sharpen;
 
-namespace Lucene.Net.Search.Postingshighlight
+namespace Lucene.Net.Search.PostingsHighlight
 {
 	/// <summary>Creates a formatted snippet from the top passages.</summary>
 	/// <remarks>

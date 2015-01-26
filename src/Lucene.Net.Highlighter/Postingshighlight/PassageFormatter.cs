@@ -4,10 +4,7 @@
  * If this is an open source Java library, include the proper license and copyright attributions here!
  */
 
-using Lucene.Net.Search.Postingshighlight;
-using Sharpen;
-
-namespace Lucene.Net.Search.Postingshighlight
+namespace Lucene.Net.Search.PostingsHighlight
 {
 	/// <summary>Creates a formatted snippet from the top passages.</summary>
 	/// <remarks>Creates a formatted snippet from the top passages.</remarks>

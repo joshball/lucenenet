@@ -11,13 +11,10 @@ using System.IO;
 using System.Text;
 using Lucene.Net.Analysis;
 using Lucene.Net.Index;
-using Lucene.Net.Search;
-using Lucene.Net.Search.Postingshighlight;
 using Lucene.Net.Util;
 using Lucene.Net.Util.Automaton;
-using Sharpen;
 
-namespace Lucene.Net.Search.Postingshighlight
+namespace Lucene.Net.Search.PostingsHighlight
 {
 	/// <summary>
 	/// Simple highlighter that does not analyze fields nor use

@@ -6,8 +6,6 @@
 
 using Lucene.Net.Analysis;
 using Lucene.Net.Analysis.Tokenattributes;
-using Lucene.Net.Search.Highlight;
-using Sharpen;
 
 namespace Lucene.Net.Search.Highlight
 {

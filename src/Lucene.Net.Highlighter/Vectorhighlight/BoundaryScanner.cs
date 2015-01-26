@@ -5,10 +5,8 @@
  */
 
 using System.Text;
-using Lucene.Net.Search.Vectorhighlight;
-using Sharpen;
 
-namespace Lucene.Net.Search.Vectorhighlight
+namespace Lucene.Net.Search.VectorHighlight
 {
 	/// <summary>
 	/// Finds fragment boundaries: pluggable into

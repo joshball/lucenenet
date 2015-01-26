@@ -7,7 +7,7 @@
     <ProjectGuid>{2F458B53-E352-4064-8809-857BBF0C350B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Lucene.Net.Highlighter</RootNamespace>
+    <RootNamespace>Lucene.Net.Search</RootNamespace>
     <AssemblyName>Lucene.Net.Highlighter</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -65,33 +65,33 @@
     <Compile Include="Highlight\WeightedSpanTerm.cs" />
     <Compile Include="Highlight\WeightedSpanTermExtractor.cs" />
     <Compile Include="Highlight\WeightedTerm.cs" />
-    <Compile Include="Postingshighlight\DefaultPassageFormatter.cs" />
-    <Compile Include="Postingshighlight\MultiTermHighlighting.cs" />
-    <Compile Include="Postingshighlight\Passage.cs" />
-    <Compile Include="Postingshighlight\PassageFormatter.cs" />
-    <Compile Include="Postingshighlight\PassageScorer.cs" />
-    <Compile Include="Postingshighlight\PostingsHighlighter.cs" />
-    <Compile Include="Postingshighlight\WholeBreakIterator.cs" />
+    <Compile Include="PostingsHighlight\DefaultPassageFormatter.cs" />
+    <Compile Include="PostingsHighlight\MultiTermHighlighting.cs" />
+    <Compile Include="PostingsHighlight\Passage.cs" />
+    <Compile Include="PostingsHighlight\PassageFormatter.cs" />
+    <Compile Include="PostingsHighlight\PassageScorer.cs" />
+    <Compile Include="PostingsHighlight\PostingsHighlighter.cs" />
+    <Compile Include="PostingsHighlight\WholeBreakIterator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Vectorhighlight\BaseFragListBuilder.cs" />
-    <Compile Include="Vectorhighlight\BaseFragmentsBuilder.cs" />
-    <Compile Include="Vectorhighlight\BoundaryScanner.cs" />
-    <Compile Include="Vectorhighlight\BreakIteratorBoundaryScanner.cs" />
-    <Compile Include="Vectorhighlight\FastVectorHighlighter.cs" />
-    <Compile Include="Vectorhighlight\FieldFragList.cs" />
-    <Compile Include="Vectorhighlight\FieldPhraseList.cs" />
-    <Compile Include="Vectorhighlight\FieldQuery.cs" />
-    <Compile Include="Vectorhighlight\FieldTermStack.cs" />
-    <Compile Include="Vectorhighlight\FragListBuilder.cs" />
-    <Compile Include="Vectorhighlight\FragmentsBuilder.cs" />
-    <Compile Include="Vectorhighlight\ScoreOrderFragmentsBuilder.cs" />
-    <Compile Include="Vectorhighlight\SimpleBoundaryScanner.cs" />
-    <Compile Include="Vectorhighlight\SimpleFieldFragList.cs" />
-    <Compile Include="Vectorhighlight\SimpleFragListBuilder.cs" />
-    <Compile Include="Vectorhighlight\SimpleFragmentsBuilder.cs" />
-    <Compile Include="Vectorhighlight\SingleFragListBuilder.cs" />
-    <Compile Include="Vectorhighlight\WeightedFieldFragList.cs" />
-    <Compile Include="Vectorhighlight\WeightedFragListBuilder.cs" />
+    <Compile Include="VectorHighlight\BaseFragListBuilder.cs" />
+    <Compile Include="VectorHighlight\BaseFragmentsBuilder.cs" />
+    <Compile Include="VectorHighlight\BoundaryScanner.cs" />
+    <Compile Include="VectorHighlight\BreakIteratorBoundaryScanner.cs" />
+    <Compile Include="VectorHighlight\FastVectorHighlighter.cs" />
+    <Compile Include="VectorHighlight\FieldFragList.cs" />
+    <Compile Include="VectorHighlight\FieldPhraseList.cs" />
+    <Compile Include="VectorHighlight\FieldQuery.cs" />
+    <Compile Include="VectorHighlight\FieldTermStack.cs" />
+    <Compile Include="VectorHighlight\FragListBuilder.cs" />
+    <Compile Include="VectorHighlight\FragmentsBuilder.cs" />
+    <Compile Include="VectorHighlight\ScoreOrderFragmentsBuilder.cs" />
+    <Compile Include="VectorHighlight\SimpleBoundaryScanner.cs" />
+    <Compile Include="VectorHighlight\SimpleFieldFragList.cs" />
+    <Compile Include="VectorHighlight\SimpleFragListBuilder.cs" />
+    <Compile Include="VectorHighlight\SimpleFragmentsBuilder.cs" />
+    <Compile Include="VectorHighlight\SingleFragListBuilder.cs" />
+    <Compile Include="VectorHighlight\WeightedFieldFragList.cs" />
+    <Compile Include="VectorHighlight\WeightedFragListBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lucene.Net.Core\Lucene.Net.csproj">

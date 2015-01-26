@@ -6,10 +6,8 @@
 
 using Lucene.Net.Index;
 using Lucene.Net.Search.Highlight;
-using Lucene.Net.Search.Vectorhighlight;
-using Sharpen;
 
-namespace Lucene.Net.Search.Vectorhighlight
+namespace Lucene.Net.Search.VectorHighlight
 {
 	/// <summary>
 	/// <see cref="FragmentsBuilder">FragmentsBuilder</see>

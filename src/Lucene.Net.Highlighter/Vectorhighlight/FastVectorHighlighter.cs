@@ -8,12 +8,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using Lucene.Net.Index;
-using Lucene.Net.Search;
 using Lucene.Net.Search.Highlight;
-using Lucene.Net.Search.Vectorhighlight;
-using Sharpen;
 
-namespace Lucene.Net.Search.Vectorhighlight
+namespace Lucene.Net.Search.VectorHighlight
 {
 	/// <summary>Another highlighter implementation.</summary>
 	/// <remarks>Another highlighter implementation.</remarks>

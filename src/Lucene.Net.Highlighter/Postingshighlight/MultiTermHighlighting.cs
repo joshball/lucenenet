@@ -9,14 +9,11 @@ using System.Collections.Generic;
 using Lucene.Net.Analysis;
 using Lucene.Net.Analysis.Tokenattributes;
 using Lucene.Net.Index;
-using Lucene.Net.Search;
-using Lucene.Net.Search.Postingshighlight;
 using Lucene.Net.Search.Spans;
 using Lucene.Net.Util;
 using Lucene.Net.Util.Automaton;
-using Sharpen;
 
-namespace Lucene.Net.Search.Postingshighlight
+namespace Lucene.Net.Search.PostingsHighlight
 {
 	/// <summary>Support for highlighting multiterm queries in PostingsHighlighter.</summary>
 	/// <remarks>Support for highlighting multiterm queries in PostingsHighlighter.</remarks>

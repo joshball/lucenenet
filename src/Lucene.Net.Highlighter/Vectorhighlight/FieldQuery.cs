@@ -7,11 +7,8 @@
 using System;
 using System.Collections.Generic;
 using Lucene.Net.Index;
-using Lucene.Net.Search;
-using Lucene.Net.Search.Vectorhighlight;
-using Sharpen;
 
-namespace Lucene.Net.Search.Vectorhighlight
+namespace Lucene.Net.Search.VectorHighlight
 {
 	/// <summary>
 	/// FieldQuery breaks down query object into terms/phrases and keeps

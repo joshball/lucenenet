@@ -5,8 +5,6 @@
  */
 
 using System.Text;
-using Lucene.Net.Search.Highlight;
-using Sharpen;
 
 namespace Lucene.Net.Search.Highlight
 {

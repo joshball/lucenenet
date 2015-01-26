@@ -5,10 +5,8 @@
  */
 
 using System.Collections.Generic;
-using Lucene.Net.Search.Vectorhighlight;
-using Sharpen;
 
-namespace Lucene.Net.Search.Vectorhighlight
+namespace Lucene.Net.Search.VectorHighlight
 {
 	/// <summary>
 	/// A simple implementation of

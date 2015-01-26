@@ -4,11 +4,9 @@
  * If this is an open source Java library, include the proper license and copyright attributions here!
  */
 
-using Lucene.Net.Search.Postingshighlight;
 using Lucene.Net.Util;
-using Sharpen;
 
-namespace Lucene.Net.Search.Postingshighlight
+namespace Lucene.Net.Search.PostingsHighlight
 {
 	/// <summary>Represents a passage (typically a sentence of the document).</summary>
 	/// <remarks>

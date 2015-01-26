@@ -8,9 +8,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using Lucene.Net.Index;
-using Lucene.Net.Search;
-using Lucene.Net.Search.Highlight;
-using Sharpen;
 
 namespace Lucene.Net.Search.Highlight
 {

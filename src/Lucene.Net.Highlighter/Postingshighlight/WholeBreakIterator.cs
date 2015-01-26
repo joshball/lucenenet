@@ -5,10 +5,8 @@
  */
 
 using System;
-using Lucene.Net.Search.Postingshighlight;
-using Sharpen;
 
-namespace Lucene.Net.Search.Postingshighlight
+namespace Lucene.Net.Search.PostingsHighlight
 {
 	/// <summary>Just produces one single fragment for the entire text</summary>
 	public sealed class WholeBreakIterator : BreakIterator

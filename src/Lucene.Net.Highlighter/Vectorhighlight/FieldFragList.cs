@@ -6,10 +6,8 @@
 
 using System.Collections.Generic;
 using System.Text;
-using Lucene.Net.Search.Vectorhighlight;
-using Sharpen;
 
-namespace Lucene.Net.Search.Vectorhighlight
+namespace Lucene.Net.Search.VectorHighlight
 {
 	/// <summary>
 	/// FieldFragList has a list of "frag info" that is used by FragmentsBuilder class

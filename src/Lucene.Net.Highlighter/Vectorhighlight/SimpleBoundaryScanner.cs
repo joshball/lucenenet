@@ -6,10 +6,9 @@
 
 using System.Collections.Generic;
 using System.Text;
-using Lucene.Net.Search.Vectorhighlight;
-using Sharpen;
+using Lucene.Net.Support;
 
-namespace Lucene.Net.Search.Vectorhighlight
+namespace Lucene.Net.Search.VectorHighlight
 {
 	/// <summary>
 	/// Simple boundary scanner implementation that divides fragments

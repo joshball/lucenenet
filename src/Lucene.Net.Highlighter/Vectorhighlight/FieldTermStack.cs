@@ -8,11 +8,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Lucene.Net.Index;
-using Lucene.Net.Search.Vectorhighlight;
 using Lucene.Net.Util;
-using Sharpen;
 
-namespace Lucene.Net.Search.Vectorhighlight
+namespace Lucene.Net.Search.VectorHighlight
 {
 	/// <summary>
 	/// <code>FieldTermStack</code> is a stack that keeps query terms in the specified field

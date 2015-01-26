@@ -10,9 +10,7 @@ using System.IO;
 using Lucene.Net.Analysis;
 using Lucene.Net.Analysis.Tokenattributes;
 using Lucene.Net.Index;
-using Lucene.Net.Search.Highlight;
 using Lucene.Net.Util;
-using Sharpen;
 
 namespace Lucene.Net.Search.Highlight
 {

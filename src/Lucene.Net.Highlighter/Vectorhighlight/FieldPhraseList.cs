@@ -7,11 +7,9 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Lucene.Net.Search.Vectorhighlight;
 using Lucene.Net.Util;
-using Sharpen;
 
-namespace Lucene.Net.Search.Vectorhighlight
+namespace Lucene.Net.Search.VectorHighlight
 {
 	/// <summary>
 	/// FieldPhraseList has a list of WeightedPhraseInfo that is used by FragListBuilder
@@ -129,7 +127,7 @@ namespace Lucene.Net.Search.Vectorhighlight
 		/// <summary>Merging constructor.</summary>
 		/// <remarks>Merging constructor.</remarks>
 		/// <param name="toMerge">FieldPhraseLists to merge to build this one</param>
-		public FieldPhraseList(Lucene.Net.Search.Vectorhighlight.FieldPhraseList[]
+		public FieldPhraseList(FieldPhraseList[]
 			 toMerge)
 		{
 			// Merge all overlapping WeightedPhraseInfos
@@ -137,7 +135,7 @@ namespace Lucene.Net.Search.Vectorhighlight
 			Iterator<FieldPhraseList.WeightedPhraseInfo>[] allInfos = new Iterator[toMerge.Length
 				];
 			int index = 0;
-			foreach (Lucene.Net.Search.Vectorhighlight.FieldPhraseList fplToMerge in toMerge)
+			foreach (FieldPhraseList fplToMerge in toMerge)
 			{
 				allInfos[index++] = fplToMerge.phraseList.Iterator();
 			}

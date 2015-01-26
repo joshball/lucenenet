@@ -5,9 +5,8 @@
  */
 
 using System;
-using Sharpen;
 
-namespace Lucene.Net.Search.Postingshighlight
+namespace Lucene.Net.Search.PostingsHighlight
 {
 	/// <summary>
 	/// Ranks passages found by
