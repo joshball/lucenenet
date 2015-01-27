@@ -8,7 +8,7 @@ namespace Lucene.Net.Search.VectorHighlight
 {
 	/// <summary>
 	/// A weighted implementation of
-	/// <see cref="FragListBuilder">FragListBuilder</see>
+	/// <see cref="IFragListBuilder">IFragListBuilder</see>
 	/// .
 	/// </summary>
 	public class WeightedFragListBuilder : BaseFragListBuilder

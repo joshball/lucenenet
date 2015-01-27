@@ -8,12 +8,12 @@ using System.Text;
 
 namespace Lucene.Net.Search.Highlight
 {
-	/// <summary>
-	/// Simple
-	/// <see cref="Encoder">Encoder</see>
-	/// implementation to escape text for HTML output
-	/// </summary>
-	public class SimpleHTMLEncoder : Encoder
+    /// <summary>
+    /// Simple
+    /// <see cref="IEncoder">IEncoder</see>
+    /// implementation to escape text for HTML output
+    /// </summary>
+    public class SimpleHTMLEncoder : IEncoder
 	{
 		public SimpleHTMLEncoder()
 		{

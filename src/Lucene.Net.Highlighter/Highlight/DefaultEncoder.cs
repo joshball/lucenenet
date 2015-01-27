@@ -1,25 +1,15 @@
-/*
- * This code is derived from MyJavaLibrary (http://somelinktomycoollibrary)
- * 
- * If this is an open source Java library, include the proper license and copyright attributions here!
- */
-
 namespace Lucene.Net.Search.Highlight
 {
-	/// <summary>
-	/// Simple
-	/// <see cref="Encoder">Encoder</see>
-	/// implementation that does not modify the output
-	/// </summary>
-	public class DefaultEncoder : Encoder
-	{
-		public DefaultEncoder()
-		{
-		}
-
-		public virtual string EncodeText(string originalText)
-		{
-			return originalText;
-		}
-	}
+    /// <summary>
+    ///     Simple
+    ///     <see cref="IEncoder">IEncoder</see>
+    ///     implementation that does not modify the output
+    /// </summary>
+    public class DefaultEncoder : IEncoder
+    {
+        public virtual string EncodeText(string originalText)
+        {
+            return originalText;
+        }
+    }
 }

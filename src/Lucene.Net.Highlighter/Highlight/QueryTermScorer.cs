@@ -13,13 +13,13 @@ using Lucene.Net.Index;
 namespace Lucene.Net.Search.Highlight
 {
 	/// <summary>
-	/// <see cref="Scorer">Scorer</see>
+	/// <see cref="IScorer">IScorer</see>
 	/// implementation which scores text fragments by the number of
 	/// unique query terms found. This class uses the
 	/// <see cref="QueryTermExtractor">QueryTermExtractor</see>
 	/// class to process determine the query terms and their boosts to be used.
 	/// </summary>
-	public class QueryTermScorer : Scorer
+	public class QueryTermScorer : IScorer
 	{
 		internal TextFragment currentTextFragment = null;
 

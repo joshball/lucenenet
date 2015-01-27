@@ -15,18 +15,18 @@ using Lucene.Net.Search.VectorHighlight;
 namespace Lucene.Net.Search.VectorHighlight
 {
 	/// <summary>
-	/// Base FragmentsBuilder implementation that supports colored pre/post
+	/// Base IFragmentsBuilder implementation that supports colored pre/post
 	/// tags and multivalued fields.
 	/// </summary>
 	/// <remarks>
-	/// Base FragmentsBuilder implementation that supports colored pre/post
+	/// Base IFragmentsBuilder implementation that supports colored pre/post
 	/// tags and multivalued fields.
 	/// <p>
 	/// Uses
-	/// <see cref="BoundaryScanner">BoundaryScanner</see>
+	/// <see cref="IBoundaryScanner">IBoundaryScanner</see>
 	/// to determine fragments.
 	/// </remarks>
-	public abstract class BaseFragmentsBuilder : FragmentsBuilder
+	public abstract class BaseFragmentsBuilder : IFragmentsBuilder
 	{
 		protected internal string[] preTags;
 
@@ -45,7 +45,7 @@ namespace Lucene.Net.Search.VectorHighlight
 
 		private char multiValuedSeparator = ' ';
 
-		private readonly BoundaryScanner boundaryScanner;
+		private readonly IBoundaryScanner boundaryScanner;
 
 		private bool discreteMultiValueHighlighting = false;
 
@@ -59,12 +59,12 @@ namespace Lucene.Net.Search.VectorHighlight
 		{
 		}
 
-		protected internal BaseFragmentsBuilder(BoundaryScanner boundaryScanner) : this(new 
+		protected internal BaseFragmentsBuilder(IBoundaryScanner boundaryScanner) : this(new 
 			string[] { "<b>" }, new string[] { "</b>" }, boundaryScanner)
 		{
 		}
 
-		protected internal BaseFragmentsBuilder(string[] preTags, string[] postTags, BoundaryScanner
+		protected internal BaseFragmentsBuilder(string[] preTags, string[] postTags, IBoundaryScanner
 			 boundaryScanner)
 		{
 			this.preTags = preTags;

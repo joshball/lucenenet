@@ -9,12 +9,12 @@ using Lucene.Net.Analysis.Tokenattributes;
 
 namespace Lucene.Net.Search.Highlight
 {
-	/// <summary>
-	/// <see cref="Fragmenter">Fragmenter</see>
-	/// implementation which breaks text up into same-size
-	/// fragments with no concerns over spotting sentence boundaries.
-	/// </summary>
-	public class SimpleFragmenter : Fragmenter
+    /// <summary>
+    /// <see cref="IFragmenter">IFragmenter</see>
+    /// implementation which breaks text up into same-size
+    /// fragments with no concerns over spotting sentence boundaries.
+    /// </summary>
+    public class SimpleFragmenter : IFragmenter
 	{
 		private const int DEFAULT_FRAGMENT_SIZE = 100;
 

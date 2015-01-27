@@ -10,7 +10,7 @@ namespace Lucene.Net.Search.VectorHighlight
 {
 	/// <summary>
 	/// An implementation class of
-	/// <see cref="FragListBuilder">FragListBuilder</see>
+	/// <see cref="IFragListBuilder">IFragListBuilder</see>
 	/// that generates one
 	/// <see cref="WeightedFragInfo">WeightedFragInfo</see>
 	/// object.
@@ -23,7 +23,7 @@ namespace Lucene.Net.Search.VectorHighlight
 	/// new SingleFragListBuilder(), new SimpleFragmentsBuilder() );
 	/// </pre>
 	/// </summary>
-	public class SingleFragListBuilder : FragListBuilder
+	public class SingleFragListBuilder : IFragListBuilder
 	{
 		public virtual FieldFragList CreateFieldFragList(FieldPhraseList fieldPhraseList, 
 			int fragCharSize)

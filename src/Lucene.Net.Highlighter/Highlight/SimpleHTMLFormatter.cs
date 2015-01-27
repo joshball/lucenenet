@@ -8,13 +8,13 @@ using System.Text;
 
 namespace Lucene.Net.Search.Highlight
 {
-	/// <summary>
-	/// Simple
-	/// <see cref="Formatter">Formatter</see>
-	/// implementation to highlight terms with a pre and
-	/// post tag.
-	/// </summary>
-	public class SimpleHTMLFormatter : Formatter
+    /// <summary>
+    /// Simple
+    /// <see cref="IFormatter">IFormatter</see>
+    /// implementation to highlight terms with a pre and
+    /// post tag.
+    /// </summary>
+    public class SimpleHTMLFormatter : IFormatter
 	{
 		private static readonly string DEFAULT_PRE_TAG = "<B>";
 

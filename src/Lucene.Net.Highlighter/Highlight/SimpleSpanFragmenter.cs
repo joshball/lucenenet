@@ -10,15 +10,15 @@ using Lucene.Net.Analysis.Tokenattributes;
 
 namespace Lucene.Net.Search.Highlight
 {
-	/// <summary>
-	/// <see cref="Fragmenter">Fragmenter</see>
-	/// implementation which breaks text up into same-size
-	/// fragments but does not split up
-	/// <see cref="Lucene.Net.Search.Spans.Spans">Lucene.Net.Search.Spans.Spans
-	/// 	</see>
-	/// . This is a simple sample class.
-	/// </summary>
-	public class SimpleSpanFragmenter : Fragmenter
+    /// <summary>
+    /// <see cref="IFragmenter">IFragmenter</see>
+    /// implementation which breaks text up into same-size
+    /// fragments but does not split up
+    /// <see cref="Lucene.Net.Search.Spans.Spans">Lucene.Net.Search.Spans.Spans
+    /// 	</see>
+    /// . This is a simple sample class.
+    /// </summary>
+    public class SimpleSpanFragmenter : IFragmenter
 	{
 		private const int DEFAULT_FRAGMENT_SIZE = 100;
 

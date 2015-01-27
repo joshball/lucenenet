@@ -11,10 +11,10 @@ namespace Lucene.Net.Search.VectorHighlight
 {
 	/// <summary>
 	/// A abstract implementation of
-	/// <see cref="FragListBuilder">FragListBuilder</see>
+	/// <see cref="IFragListBuilder">IFragListBuilder</see>
 	/// .
 	/// </summary>
-	public abstract class BaseFragListBuilder : FragListBuilder
+	public abstract class BaseFragListBuilder : IFragListBuilder
 	{
 		public const int MARGIN_DEFAULT = 6;
 

@@ -18,7 +18,7 @@ namespace Lucene.Net.Search.VectorHighlight
 	/// Simple boundary scanner implementation that divides fragments
 	/// based on a set of separator characters.
 	/// </remarks>
-	public class SimpleBoundaryScanner : BoundaryScanner
+	public class SimpleBoundaryScanner : IBoundaryScanner
 	{
 		public const int DEFAULT_MAX_SCAN = 20;
 

@@ -10,15 +10,15 @@ using Lucene.Net.Search.Highlight;
 namespace Lucene.Net.Search.VectorHighlight
 {
 	/// <summary>
-	/// <see cref="FragmentsBuilder">FragmentsBuilder</see>
+	/// <see cref="IFragmentsBuilder">IFragmentsBuilder</see>
 	/// is an interface for fragments (snippets) builder classes.
 	/// A
-	/// <see cref="FragmentsBuilder">FragmentsBuilder</see>
+	/// <see cref="IFragmentsBuilder">IFragmentsBuilder</see>
 	/// class can be plugged in to
 	/// <see cref="FastVectorHighlighter">FastVectorHighlighter</see>
 	/// .
 	/// </summary>
-	public interface FragmentsBuilder
+	public interface IFragmentsBuilder
 	{
 		/// <summary>create a fragment.</summary>
 		/// <remarks>create a fragment.</remarks>
@@ -58,7 +58,7 @@ namespace Lucene.Net.Search.VectorHighlight
 		/// <returns>a created fragment or null when no fragment created</returns>
 		/// <exception cref="System.IO.IOException">If there is a low-level I/O error</exception>
 		string CreateFragment(IndexReader reader, int docId, string fieldName, FieldFragList
-			 fieldFragList, string[] preTags, string[] postTags, Encoder encoder);
+			 fieldFragList, string[] preTags, string[] postTags, IEncoder encoder);
 
 		/// <summary>create multiple fragments.</summary>
 		/// <remarks>create multiple fragments.</remarks>
@@ -76,7 +76,7 @@ namespace Lucene.Net.Search.VectorHighlight
 		/// </returns>
 		/// <exception cref="System.IO.IOException">If there is a low-level I/O error</exception>
 		string[] CreateFragments(IndexReader reader, int docId, string fieldName, FieldFragList
-			 fieldFragList, int maxNumFragments, string[] preTags, string[] postTags, Encoder
+			 fieldFragList, int maxNumFragments, string[] preTags, string[] postTags, IEncoder
 			 encoder);
 	}
 }

@@ -24,9 +24,9 @@ namespace Lucene.Net.Search.VectorHighlight
 
 		private readonly bool fieldMatch;
 
-		private readonly FragListBuilder fragListBuilder;
+		private readonly IFragListBuilder fragListBuilder;
 
-		private readonly FragmentsBuilder fragmentsBuilder;
+		private readonly IFragmentsBuilder fragmentsBuilder;
 
 		private int phraseLimit = int.MaxValue;
 
@@ -55,23 +55,23 @@ namespace Lucene.Net.Search.VectorHighlight
 		/// <summary>a constructor.</summary>
 		/// <remarks>
 		/// a constructor. A
-		/// <see cref="FragListBuilder">FragListBuilder</see>
+		/// <see cref="IFragListBuilder">IFragListBuilder</see>
 		/// and a
-		/// <see cref="FragmentsBuilder">FragmentsBuilder</see>
+		/// <see cref="IFragmentsBuilder">IFragmentsBuilder</see>
 		/// can be specified (plugins).
 		/// </remarks>
 		/// <param name="phraseHighlight">true of false for phrase highlighting</param>
 		/// <param name="fieldMatch">true of false for field matching</param>
 		/// <param name="fragListBuilder">
 		/// an instance of
-		/// <see cref="FragListBuilder">FragListBuilder</see>
+		/// <see cref="IFragListBuilder">IFragListBuilder</see>
 		/// </param>
 		/// <param name="fragmentsBuilder">
 		/// an instance of
-		/// <see cref="FragmentsBuilder">FragmentsBuilder</see>
+		/// <see cref="IFragmentsBuilder">IFragmentsBuilder</see>
 		/// </param>
-		public FastVectorHighlighter(bool phraseHighlight, bool fieldMatch, FragListBuilder
-			 fragListBuilder, FragmentsBuilder fragmentsBuilder)
+		public FastVectorHighlighter(bool phraseHighlight, bool fieldMatch, IFragListBuilder
+			 fragListBuilder, IFragmentsBuilder fragmentsBuilder)
 		{
 			this.phraseHighlight = phraseHighlight;
 			this.fieldMatch = fieldMatch;
@@ -197,12 +197,12 @@ namespace Lucene.Net.Search.VectorHighlight
 		/// <param name="fragCharSize">the length (number of chars) of a fragment</param>
 		/// <param name="fragListBuilder">
 		/// 
-		/// <see cref="FragListBuilder">FragListBuilder</see>
+		/// <see cref="IFragListBuilder">IFragListBuilder</see>
 		/// object
 		/// </param>
 		/// <param name="fragmentsBuilder">
 		/// 
-		/// <see cref="FragmentsBuilder">FragmentsBuilder</see>
+		/// <see cref="IFragmentsBuilder">IFragmentsBuilder</see>
 		/// object
 		/// </param>
 		/// <param name="preTags">pre-tags to be used to highlight terms</param>
@@ -211,8 +211,8 @@ namespace Lucene.Net.Search.VectorHighlight
 		/// <returns>the best fragment (snippet) string</returns>
 		/// <exception cref="System.IO.IOException">If there is a low-level I/O error</exception>
 		public string GetBestFragment(FieldQuery fieldQuery, IndexReader reader, int docId
-			, string fieldName, int fragCharSize, FragListBuilder fragListBuilder, FragmentsBuilder
-			 fragmentsBuilder, string[] preTags, string[] postTags, Encoder encoder)
+			, string fieldName, int fragCharSize, IFragListBuilder fragListBuilder, IFragmentsBuilder
+			 fragmentsBuilder, string[] preTags, string[] postTags, IEncoder encoder)
 		{
 			FieldFragList fieldFragList = GetFieldFragList(fragListBuilder, fieldQuery, reader
 				, docId, fieldName, fragCharSize);
@@ -239,12 +239,12 @@ namespace Lucene.Net.Search.VectorHighlight
 		/// <param name="maxNumFragments">maximum number of fragments</param>
 		/// <param name="fragListBuilder">
 		/// 
-		/// <see cref="FragListBuilder">FragListBuilder</see>
+		/// <see cref="IFragListBuilder">IFragListBuilder</see>
 		/// object
 		/// </param>
 		/// <param name="fragmentsBuilder">
 		/// 
-		/// <see cref="FragmentsBuilder">FragmentsBuilder</see>
+		/// <see cref="IFragmentsBuilder">IFragmentsBuilder</see>
 		/// object
 		/// </param>
 		/// <param name="preTags">pre-tags to be used to highlight terms</param>
@@ -256,8 +256,8 @@ namespace Lucene.Net.Search.VectorHighlight
 		/// </returns>
 		/// <exception cref="System.IO.IOException">If there is a low-level I/O error</exception>
 		public string[] GetBestFragments(FieldQuery fieldQuery, IndexReader reader, int docId
-			, string fieldName, int fragCharSize, int maxNumFragments, FragListBuilder fragListBuilder
-			, FragmentsBuilder fragmentsBuilder, string[] preTags, string[] postTags, Encoder
+			, string fieldName, int fragCharSize, int maxNumFragments, IFragListBuilder fragListBuilder
+			, IFragmentsBuilder fragmentsBuilder, string[] preTags, string[] postTags, IEncoder
 			 encoder)
 		{
 			FieldFragList fieldFragList = GetFieldFragList(fragListBuilder, fieldQuery, reader
@@ -293,12 +293,12 @@ namespace Lucene.Net.Search.VectorHighlight
 		/// <param name="maxNumFragments">maximum number of fragments</param>
 		/// <param name="fragListBuilder">
 		/// 
-		/// <see cref="FragListBuilder">FragListBuilder</see>
+		/// <see cref="IFragListBuilder">IFragListBuilder</see>
 		/// object
 		/// </param>
 		/// <param name="fragmentsBuilder">
 		/// 
-		/// <see cref="FragmentsBuilder">FragmentsBuilder</see>
+		/// <see cref="IFragmentsBuilder">IFragmentsBuilder</see>
 		/// object
 		/// </param>
 		/// <param name="preTags">pre-tags to be used to highlight terms</param>
@@ -311,8 +311,8 @@ namespace Lucene.Net.Search.VectorHighlight
 		/// <exception cref="System.IO.IOException">If there is a low-level I/O error</exception>
 		public string[] GetBestFragments(FieldQuery fieldQuery, IndexReader reader, int docId
 			, string storedField, ICollection<string> matchedFields, int fragCharSize, int maxNumFragments
-			, FragListBuilder fragListBuilder, FragmentsBuilder fragmentsBuilder, string[] preTags
-			, string[] postTags, Encoder encoder)
+			, IFragListBuilder fragListBuilder, IFragmentsBuilder fragmentsBuilder, string[] preTags
+			, string[] postTags, IEncoder encoder)
 		{
 			FieldFragList fieldFragList = GetFieldFragList(fragListBuilder, fieldQuery, reader
 				, docId, matchedFields, fragCharSize);
@@ -323,7 +323,7 @@ namespace Lucene.Net.Search.VectorHighlight
 		/// <summary>Build a FieldFragList for one field.</summary>
 		/// <remarks>Build a FieldFragList for one field.</remarks>
 		/// <exception cref="System.IO.IOException"></exception>
-		private FieldFragList GetFieldFragList(FragListBuilder fragListBuilder, FieldQuery
+		private FieldFragList GetFieldFragList(IFragListBuilder fragListBuilder, FieldQuery
 			 fieldQuery, IndexReader reader, int docId, string matchedField, int fragCharSize
 			)
 		{
@@ -337,7 +337,7 @@ namespace Lucene.Net.Search.VectorHighlight
 		/// <summary>Build a FieldFragList for more than one field.</summary>
 		/// <remarks>Build a FieldFragList for more than one field.</remarks>
 		/// <exception cref="System.IO.IOException"></exception>
-		private FieldFragList GetFieldFragList(FragListBuilder fragListBuilder, FieldQuery
+		private FieldFragList GetFieldFragList(IFragListBuilder fragListBuilder, FieldQuery
 			 fieldQuery, IndexReader reader, int docId, ICollection<string> matchedFields, int
 			 fragCharSize)
 		{

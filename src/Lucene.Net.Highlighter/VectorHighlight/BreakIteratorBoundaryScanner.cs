@@ -10,14 +10,14 @@ namespace Lucene.Net.Search.VectorHighlight
 {
 	/// <summary>
 	/// A
-	/// <see cref="BoundaryScanner">BoundaryScanner</see>
+	/// <see cref="IBoundaryScanner">IBoundaryScanner</see>
 	/// implementation that uses
 	/// <see cref="Sharpen.BreakIterator">Sharpen.BreakIterator</see>
 	/// to find
 	/// boundaries in the text.
 	/// </summary>
 	/// <seealso cref="Sharpen.BreakIterator">Sharpen.BreakIterator</seealso>
-	public class BreakIteratorBoundaryScanner : BoundaryScanner
+	public class BreakIteratorBoundaryScanner : IBoundaryScanner
 	{
 		internal readonly BreakIterator bi;
 

@@ -10,11 +10,11 @@ using System.Text;
 namespace Lucene.Net.Search.VectorHighlight
 {
 	/// <summary>
-	/// FieldFragList has a list of "frag info" that is used by FragmentsBuilder class
+	/// FieldFragList has a list of "frag info" that is used by IFragmentsBuilder class
 	/// to create fragments (snippets).
 	/// </summary>
 	/// <remarks>
-	/// FieldFragList has a list of "frag info" that is used by FragmentsBuilder class
+	/// FieldFragList has a list of "frag info" that is used by IFragmentsBuilder class
 	/// to create fragments (snippets).
 	/// </remarks>
 	public abstract class FieldFragList

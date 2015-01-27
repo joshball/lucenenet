@@ -12,11 +12,11 @@ using Lucene.Net.Util;
 namespace Lucene.Net.Search.VectorHighlight
 {
 	/// <summary>
-	/// FieldPhraseList has a list of WeightedPhraseInfo that is used by FragListBuilder
+	/// FieldPhraseList has a list of WeightedPhraseInfo that is used by IFragListBuilder
 	/// to create a FieldFragList object.
 	/// </summary>
 	/// <remarks>
-	/// FieldPhraseList has a list of WeightedPhraseInfo that is used by FragListBuilder
+	/// FieldPhraseList has a list of WeightedPhraseInfo that is used by IFragListBuilder
 	/// to create a FieldFragList object.
 	/// </remarks>
 	public class FieldPhraseList

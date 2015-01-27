@@ -6,12 +6,12 @@
 
 namespace Lucene.Net.Search.VectorHighlight
 {
-	/// <summary>FragListBuilder is an interface for FieldFragList builder classes.</summary>
+	/// <summary>IFragListBuilder is an interface for FieldFragList builder classes.</summary>
 	/// <remarks>
-	/// FragListBuilder is an interface for FieldFragList builder classes.
-	/// A FragListBuilder class can be plugged in to Highlighter.
+	/// IFragListBuilder is an interface for FieldFragList builder classes.
+	/// A IFragListBuilder class can be plugged in to Highlighter.
 	/// </remarks>
-	public interface FragListBuilder
+	public interface IFragListBuilder
 	{
 		/// <summary>create a FieldFragList.</summary>
 		/// <remarks>create a FieldFragList.</remarks>

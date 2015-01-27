@@ -8,8 +8,8 @@ using System.Collections.Generic;
 
 namespace Lucene.Net.Search.VectorHighlight
 {
-	/// <summary>A simple implementation of FragmentsBuilder.</summary>
-	/// <remarks>A simple implementation of FragmentsBuilder.</remarks>
+	/// <summary>A simple implementation of IFragmentsBuilder.</summary>
+	/// <remarks>A simple implementation of IFragmentsBuilder.</remarks>
 	public class SimpleFragmentsBuilder : BaseFragmentsBuilder
 	{
 		/// <summary>a constructor.</summary>
@@ -27,11 +27,11 @@ namespace Lucene.Net.Search.VectorHighlight
 		{
 		}
 
-		protected internal SimpleFragmentsBuilder(BoundaryScanner bs) : base(bs)
+		protected internal SimpleFragmentsBuilder(IBoundaryScanner bs) : base(bs)
 		{
 		}
 
-		protected internal SimpleFragmentsBuilder(string[] preTags, string[] postTags, BoundaryScanner
+		protected internal SimpleFragmentsBuilder(string[] preTags, string[] postTags, IBoundaryScanner
 			 bs) : base(preTags, postTags, bs)
 		{
 		}

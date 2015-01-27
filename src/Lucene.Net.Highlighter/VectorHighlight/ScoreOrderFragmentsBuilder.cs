@@ -8,9 +8,9 @@ using System.Collections.Generic;
 
 namespace Lucene.Net.Search.VectorHighlight
 {
-	/// <summary>An implementation of FragmentsBuilder that outputs score-order fragments.
+	/// <summary>An implementation of IFragmentsBuilder that outputs score-order fragments.
 	/// 	</summary>
-	/// <remarks>An implementation of FragmentsBuilder that outputs score-order fragments.
+	/// <remarks>An implementation of IFragmentsBuilder that outputs score-order fragments.
 	/// 	</remarks>
 	public class ScoreOrderFragmentsBuilder : BaseFragmentsBuilder
 	{
@@ -29,12 +29,12 @@ namespace Lucene.Net.Search.VectorHighlight
 		{
 		}
 
-		protected internal ScoreOrderFragmentsBuilder(BoundaryScanner bs) : base(bs)
+		protected internal ScoreOrderFragmentsBuilder(IBoundaryScanner bs) : base(bs)
 		{
 		}
 
 		protected internal ScoreOrderFragmentsBuilder(string[] preTags, string[] postTags
-			, BoundaryScanner bs) : base(preTags, postTags, bs)
+			, IBoundaryScanner bs) : base(preTags, postTags, bs)
 		{
 		}
 

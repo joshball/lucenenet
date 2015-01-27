@@ -12,7 +12,7 @@ namespace Lucene.Net.Search.VectorHighlight
 	/// Finds fragment boundaries: pluggable into
 	/// <see cref="BaseFragmentsBuilder">BaseFragmentsBuilder</see>
 	/// </summary>
-	public interface BoundaryScanner
+	public interface IBoundaryScanner
 	{
 		/// <summary>Scan backward to find end offset.</summary>
 		/// <remarks>Scan backward to find end offset.</remarks>
